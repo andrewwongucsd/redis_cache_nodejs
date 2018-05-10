@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>REdis Cache Driver Page</title>
+  <style>
+    * {box-sizing: border-box;}
+    html {font-weight: 300;  -webkit-font-smoothing: antialiased;}
+    html, input {font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",Helvetica,  Arial,"Lucida Grande",sans-serif;}
+    html, body {  height: 100%; margin: 0;padding: 0;}
+    ul {list-style-type: none;}
+    #main {height: 100%; width: 100%;}
+    .left {background-color:#ccc; width:30%;  float:left; padding-top: 100px;}
+    .right { background-color:Gray; width: 70%; float:left; padding-left: 50px; padding-top: 70px;}
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+  <div id="main">
+    <div class="left">
+      <ul class="unstyled">
+         <li><button type="button" id="SJSU">Image SJSU</button></li>
+         <li><button type="button" id="CMPE">Image CMPE Building</button></li>
+         <li><button type="button" id="LIBRARY">Image Dr. Martin Luther King Jr. Library</button></li>
+      </ul>
+    </div>
+    <div class="right">
+      <h1> Redis Cache Driver Page</h1>
+      <h3> Image loaded from: <span id="source"></span></h3>
+      <div id="image_display"></div>
+    </div>
+  </div>
+  <script>
+  $(document).ready(function(){
+    var SJSU = $('#SJSU');
+    var CMPE = $('#CMPE');
+    var LIBRARY = $('#LIBRARY');
+    var SOURCE = $('#source');
+    var IMAGE_DISPLAY = $('#image_display');
+    var BACKEND = "http://localhost:3000/";
+
+    SJSU.click(function(){
+      $.ajax({
+        url: BACKEND+"SJSU",
+        success: function(result){
+          var obj = JSON.parse(result);
+          console.log(obj.method);
+          SOURCE.text(obj.method);
+          IMAGE_DISPLAY.html("<img src='"+obj.data+"'/>");
+        },error: function(xhr, textStatus, errorThrown){
+          alert('error');
+        }
+      });
+    });
+
+    CMPE.click(function(){
+      $.ajax({
+        url: BACKEND+"CMPE",
+        type: 'GET',
+        success: function(result){
+          var obj = JSON.parse(result);
+          console.log(obj.method);
+          SOURCE.text(obj.method);
+          IMAGE_DISPLAY.html("<img src='"+obj.data+"'/>");
+        },error: function(xhr, textStatus, errorThrown){
+          alert('error');
+        }
+      });
+    });
+
+    LIBRARY.click(function(){
+      $.ajax({
+        url: BACKEND+"LIBRARY",
+        success: function(result){
+          var obj = JSON.parse(result);
+          console.log(obj.method);
+          SOURCE.text(obj.method);
+          IMAGE_DISPLAY.html("<img src='"+obj.data+"'/>");
+        },error: function(xhr, textStatus, errorThrown){
+          alert('error');
+        }
+      });
+    });
+  });
+  </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "redisCacheApp",
+  "version": "1.0.0",
+  "description": "Redis Cache Driver Application",
+  "main": "index.js",
+  "author": "Andrew Wong",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
